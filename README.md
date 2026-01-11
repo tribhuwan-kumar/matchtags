@@ -2,7 +2,7 @@
 
 ## Highlights matching html/xml tags in Neovim:
 
-<img width="956" height="227" alt="image" src="https://github.com/user-attachments/assets/15c89c13-3fb2-4139-b08a-fe41c633cad7" />
+<img width="895" height="436" alt="image" src="https://github.com/user-attachments/assets/7adb90df-44fd-4f2b-9377-0a74bcf6efb2" />
 
 _can easily handle large files_
 
