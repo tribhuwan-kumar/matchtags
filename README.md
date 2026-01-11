@@ -7,7 +7,7 @@
 _can easily handle large files_
 
 
-Installation using vimplug
+#### Installation using vimplug
 ```vim
 Plug 'tribhuwan-kumar/matchtags'
 ```
