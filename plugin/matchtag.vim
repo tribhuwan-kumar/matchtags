@@ -85,7 +85,7 @@ function! s:GetEnclosingTags()
 
     let l:tag_name_start_col = col('.')
     let l:tag_pos_col = l:tag_name_start_col - 1
-    let l:tag_name = expand('<cword>')
+    let l:tag_name = matchstr(getline('.'), '^'.l:tag_name_pat, col('.')-1)
 
     if l:tag_pos_col > 1
       let l:line_text = getline(l:found_ln)
@@ -102,8 +102,10 @@ function! s:GetEnclosingTags()
 
     let l:start_pat = '<\c' . l:tag_name . '\>'
     let l:end_pat = '</\c' . l:tag_name . '\_s*>'
+    let l:esc_tag_name = escape(l:tag_name, '.')
+
     let l:skip_expr = 'synIDattr(synID(line("."), col("."), 0), "name") =~? "comment\\|string"'
-    let l:skip_expr .= ' || getline(".")[col(".")-1 : ] =~? "^<'.l:tag_name.'[^>]*/>"'
+    let l:skip_expr .= ' || getline(".")[col(".")-1 : ] =~? "^<'.l:esc_tag_name.'[^>]*/>"'
     let l:close_pos = searchpairpos(l:start_pat, '', l:end_pat, 'W', l:skip_expr, 0, l:maxline)
 
     if l:close_pos[0] > 0
@@ -139,3 +141,4 @@ augroup MatchTagAlways
   autocmd CursorMoved,CursorMovedI,BufEnter,WinEnter * call s:UpdateMatch()
   autocmd BufLeave * call s:Cleanup()
 augroup END
+
